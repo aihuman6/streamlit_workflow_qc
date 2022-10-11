@@ -1,12 +1,6 @@
 from st_aggrid import AgGrid
 import streamlit as st
 import pandas as pd 
-import pandas_profiling
-from streamlit_pandas_profiling import st_profile_report
-from pandas_profiling import ProfileReport
-from  PIL import Image
-import requests
-from io import BytesIO
 
 
 st.set_page_config(layout='wide') #Choose wide mode as the default setting

@@ -25,9 +25,6 @@ st.markdown(""" <style> .font {
 st.markdown('<p class="font">Compare two datasets and highlight differences</p>', unsafe_allow_html=True)
 
 #################################################################################################
-def apply_color(x):
-    colors = {1: 'lightred', 0: 'lightgreen'}
-    return df_mask.applymap(lambda val: 'background-color: {}'.format(colors.get(val,'')))
 
 uploaded_file1 = st.file_uploader("Upload your new aggregated workflow output:", type=['xlsx'])
 uploaded_file2 = st.file_uploader("Upload your old aggregated workflow output:", type=['xlsx'])
@@ -77,6 +74,9 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
     if st.button('Compare datasets'):
         df_mask = df1.compare(df2 , keep_shape=True).notnull().astype('int')
         df_compare = df1.compare(df2, keep_shape=True, keep_equal=True)
+        def apply_color(x):
+          colors = {1: 'lightred', 0: 'lightgreen'}
+          return df_mask.applymap(lambda val: 'background-color: {}'.format(colors.get(val,'')))
         st.dataframe(df_compare.style.apply(apply_color, axis=None))
         
         

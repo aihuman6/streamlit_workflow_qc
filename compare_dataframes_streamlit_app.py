@@ -77,6 +77,6 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
     if st.button('Compare datasets'):
         df_mask = df1.compare(df2 , keep_shape=True).notnull().astype('int')
         df_compare = df1.compare(df2, keep_shape=True, keep_equal=True)
-        df_compare.style.apply(apply_color, axis=None)
+        st.dataframe(df_compare.style.apply(apply_color, axis=None))
         
         

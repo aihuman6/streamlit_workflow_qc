@@ -32,13 +32,13 @@ uploaded_file2 = st.file_uploader("Upload your old aggregated workflow output:",
 if uploaded_file1 is not None and uploaded_file2 is not None:
     df1=pd.read_excel(uploaded_file1)
     df2=pd.read_excel(uploaded_file2)
-#     latest_month = df1[(df1.Year==df1.Year.max())].Month.max()
-#     latest_week = df1[(df1.Year==df1.Year.max()) & (df1.Month == latest_month)].Week.max()
-#     latest_week_data = df1[(df1.Year==df1.Year.max()) & (df1.Month == latest_month) &
-#                           (df1.Week == latest_week)]
-#     df1 = df1[~df1.index.isin(list(latest_week_data.index))]
-#     df1.reset_index(inplace=True, drop=True)
-#     df2.reset_index(inplace=True, drop=True)
+    latest_month = df1[(df1.Year==df1.Year.max())].Month.max()
+    latest_week = df1[(df1.Year==df1.Year.max()) & (df1.Month == latest_month)].Week.max()
+    latest_week_data = df1[(df1.Year==df1.Year.max()) & (df1.Month == latest_month) &
+                          (df1.Week == latest_week)]
+    df1 = df1[~df1.index.isin(list(latest_week_data.index))]
+    df1.reset_index(inplace=True, drop=True)
+    df2.reset_index(inplace=True, drop=True)
     
     option1=st.sidebar.radio(
      'What variables do you want to include in the report?',
@@ -74,7 +74,12 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
     if st.button('Compare datasets'):
         df_diff = pd.concat([df1,df2]).drop_duplicates(keep=False)
         if len(df_diff) == 0:
-               st.text('Data matches for all weeks in the old file')
+               st.markdown(""" <style> .font {                                          
+              font-size:30px ; font-family: 'Cooper Black'; color: #FF9633;} 
+              </style> """, unsafe_allow_html=True)
+               st.markdown('<p class="font">Data matches for all weeks in the old file</p>', unsafe_allow_html=True)
+
+     #          st.text('Data matches for all weeks in the old file')
         else:
                grid_response = AgGrid(df_diff, editable=True, height=300, width='100%',)
                updated = grid_response['data']

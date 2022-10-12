@@ -78,6 +78,6 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
           colors = {1: 'lightred', 0: 'lightgreen'}
           return df_mask.applymap(lambda val: 'background-color: {}'.format(colors.get(val,'')))
         st.write(df_compare.columns)
-        st.dataframe(df_compare.style.apply(apply_color, axis=None))
+        st.dataframe(df_compare.style.apply(apply_color, axis=None).hide_index())
         
         

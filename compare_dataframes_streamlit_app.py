@@ -32,13 +32,13 @@ uploaded_file2 = st.file_uploader("Upload your old aggregated workflow output:",
 if uploaded_file1 is not None and uploaded_file2 is not None:
     df1=pd.read_excel(uploaded_file1)
     df2=pd.read_excel(uploaded_file2)
-    latest_month = df1[(df1.Year==df1.Year.max())].Month.max()
-    latest_week = df1[(df1.Year==df1.Year.max()) & (df1.Month == latest_month)].Week.max()
-    latest_week_data = df1[(df1.Year==df1.Year.max()) & (df1.Month == latest_month) &
-                          (df1.Week == latest_week)]
-    df1 = df1[~df1.index.isin(list(latest_week_data.index))]
-    df1.reset_index(inplace=True, drop=True)
-    df2.reset_index(inplace=True, drop=True)
+#     latest_month = df1[(df1.Year==df1.Year.max())].Month.max()
+#     latest_week = df1[(df1.Year==df1.Year.max()) & (df1.Month == latest_month)].Week.max()
+#     latest_week_data = df1[(df1.Year==df1.Year.max()) & (df1.Month == latest_month) &
+#                           (df1.Week == latest_week)]
+#     df1 = df1[~df1.index.isin(list(latest_week_data.index))]
+#     df1.reset_index(inplace=True, drop=True)
+#     df2.reset_index(inplace=True, drop=True)
     
     option1=st.sidebar.radio(
      'What variables do you want to include in the report?',

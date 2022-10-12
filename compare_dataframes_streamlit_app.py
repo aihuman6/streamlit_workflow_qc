@@ -74,7 +74,7 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
     if st.button('Compare datasets'):
         df_diff = pd.concat([df1,df2]).drop_duplicates(keep=False)
         if len(df_diff) == 0:
-               print('Data matches for all weeks in the old file')
+               st.text('Data matches for all weeks in the old file')
         else:
                grid_response = AgGrid(df_diff, editable=True, height=300, width='100%',)
                updated = grid_response['data']

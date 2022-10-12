@@ -1,4 +1,3 @@
 streamlit-aggrid
-pandas < 1.1
-xlrd
+pandas
 openpyxl

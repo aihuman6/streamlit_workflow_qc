@@ -72,12 +72,15 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
 # =============================================================================
 
     if st.button('Compare datasets'):
-        df_mask = df1.compare(df2 , keep_shape=True).notnull().astype('int')
-        df_compare = df1.compare(df2, keep_shape=True, keep_equal=True)
-        def apply_color(x):
-          colors = {1: 'lightred', 0: 'lightgreen'}
-          return df_mask.applymap(lambda val: 'background-color: {}'.format(colors.get(val,'')))
-        st.write(df_compare.columns)
-        st.dataframe(df_compare.style.apply(apply_color, axis=None).hide_index())
+        df_diff = pd.concat([wf_new,wf_old]).drop_duplicates(keep=False)
+        if len(df_diff) == 0:
+               print('Data matches for all weeks in the old file')
+        else:
+               grid_response = AgGrid(df_diff, editable=True, height=300, width='100%',)
+               updated = grid_response['data']
+               dff = pd.DataFrame(updated) 
+          
+  #      st.write(df_compare.columns)
+  #      st.dataframe(df_compare.style.apply(apply_color, axis=None).hide_index())
         
         

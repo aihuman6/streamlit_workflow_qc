@@ -72,7 +72,7 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
 # =============================================================================
 
     if st.button('Compare datasets'):
-        df_diff = pd.concat([wf_new,wf_old]).drop_duplicates(keep=False)
+        df_diff = pd.concat([df1,df2]).drop_duplicates(keep=False)
         if len(df_diff) == 0:
                print('Data matches for all weeks in the old file')
         else:
